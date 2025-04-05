@@ -1,0 +1,6 @@
+def run_agents(customer_data):
+    profile = profile_analysis_agent(customer_data)
+    recommendations = product_recommendation_agent(profile)
+    validated = validation_agent(recommendations)
+    report = report_generator_agent(validated)
+    return report
