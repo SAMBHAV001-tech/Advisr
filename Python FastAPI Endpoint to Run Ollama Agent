@@ -1,0 +1,13 @@
+from fastapi import FastAPI, Request
+import subprocess
+import json
+
+app = FastAPI()
+
+@app.post("/ai/analyze")
+async def analyze(request: Request):
+    data = await request.json()
+    prompt = f"Analyze this customer data and provide financial insights:\n{json.dumps(data)}"
+    
+    result = subprocess.run(["ollama", "run", "mistral", prompt], capture_output=True, text=True)
+    return {"response": result.stdout}
