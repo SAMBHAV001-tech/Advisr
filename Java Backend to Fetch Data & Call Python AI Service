@@ -1,0 +1,13 @@
+@RestController
+public class CustomerController {
+
+    @Autowired
+    CustomerService service;
+
+    @GetMapping("/analyze/{id}")
+    public String analyzeCustomer(@PathVariable int id) {
+        Customer customer = service.getCustomer(id);
+        String jsonData = new Gson().toJson(customer);
+        return HttpClient.sendPost("http://localhost:8000/ai/analyze", jsonData);
+    }
+}
