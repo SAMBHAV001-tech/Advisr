@@ -1,0 +1,4 @@
+def profile_analysis_agent(data):
+    prompt = f"Analyze the financial profile:\n{json.dumps(data)}"
+    result = subprocess.run(["ollama", "run", "mistral", prompt], capture_output=True, text=True)
+    return result.stdout
